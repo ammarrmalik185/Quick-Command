@@ -7,11 +7,15 @@ param (
 )
 
 $commandFilePath = Join-Path $PSScriptRoot "commands.psd1"
+$defaultCommandFilePath = Join-Path $PSScriptRoot "default_commands.psd1"
 
 if (-not (Test-Path $commandFilePath)) {
     Write-Host "Command file not found at $commandFilePath" -ForegroundColor Red
     exit 1
 }
+
+# Load commands
+$defaultCommands = Import-PowerShellDataFile -Path $defaultCommandFilePath
 
 # Load commands
 $commands = Import-PowerShellDataFile -Path $commandFilePath
@@ -24,6 +28,11 @@ $builtin = @{
             Write-Host "`nAvailable commands:`n"
             foreach ($name in $commands.Keys) {
                 $title = $commands[$name]["Title"]
+                Write-Host ("  {0,-12} - {1}" -f $name, $title)
+            }
+            Write-Host "`nDefault commands:`n"
+            foreach ($name in $defaultCommands.Keys) {
+                $title = $defaultCommands[$name]["Title"]
                 Write-Host ("  {0,-12} - {1}" -f $name, $title)
             }
             Write-Host "`nBuilt-in commands:`n"
@@ -42,7 +51,7 @@ $builtin = @{
     }
 }
 
-$all = $commands + $builtin
+$all = $defaultCommands + $commands + $builtin
 
 # Execute
 if ($all.ContainsKey($commandName)) {

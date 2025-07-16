@@ -7,15 +7,15 @@
         	Title = "Show current date/time"
         	Command = " Get-Date "
     	}
-	"kt" = @{
+		"kt" = @{
         	Title = "Run KT Connector"
         	Command = " cd 'C:/software/kt connect' ; ./run "
     	}
-	"mda" = @{
+		"mda" = @{
         	Title = "Run ZCAD Frontend"
         	Command = " cd 'D:/projects/zixel/zcad/mda'; pnpm run dev:pc "
     	}
-	"ivy" = @{
+		"ivy" = @{
         	Title = "Go to IVY Project directory"
         	Command = " cd 'D:/projects/zixel/zcad/ivyproject_2' "
     	}
