@@ -41,7 +41,7 @@ $builtin = @{
     edit = @{
         Title = "Edit the commands file"
         Command = {
-            notepad $commandFilePath
+            code $commandFilePath
         }
     }
     qc = @{
