@@ -32,7 +32,11 @@ $default_commands = @{
     edit = @{
         Title = "Edit the commands file"
         Command = {
-            code $commandFilePath
+            if (Get-Command code -ErrorAction SilentlyContinue) {
+                code $commandFilePath
+            } else {
+                notepad $commandFilePath
+            }
         }
     }
 
