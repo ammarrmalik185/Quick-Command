@@ -35,6 +35,14 @@ foreach ($field in @('IdentityName','Publisher','PublisherDisplayName')) {
 $manifest.Package.Identity.SetAttribute('Name', $id.IdentityName)
 $manifest.Package.Identity.SetAttribute('Publisher', $id.Publisher)
 $manifest.Package.Properties.PublisherDisplayName = [string]$id.PublisherDisplayName
+# Use the exact app name reserved in Partner Center; it is separate from IdentityName.
+if ($id.PSObject.Properties.Name -contains 'DisplayName') {
+    if ([string]::IsNullOrWhiteSpace($id.DisplayName) -or $id.DisplayName -match 'REPLACE|YOUR_|TODO') {
+        throw 'DisplayName must be the exact app name reserved in Partner Center under Manage app names.'
+    }
+    $manifest.Package.Properties.DisplayName = [string]$id.DisplayName
+    $manifest.Package.Applications.Application.VisualElements.SetAttribute('DisplayName', [string]$id.DisplayName)
+}
 $manifest.Save((Join-Path $stage 'AppxManifest.xml'))
 if (-not $MakeAppxPath) {
     $sdk = Join-Path ${env:ProgramFiles(x86)} 'Windows Kits\10\bin'

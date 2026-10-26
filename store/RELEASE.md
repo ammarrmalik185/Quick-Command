@@ -65,3 +65,7 @@ The four PNGs in store\screenshots are rendered transcript references, not actua
 These values are stored in store\identity.json; PFN, SID, and Store ID are reference metadata, not extra manifest Identity attributes. The HTML trailing-space entities in the supplied values were omitted. Store links remain unset until the product is live.
 
 The default-identity MSIX was built successfully, and its embedded AppxManifest.xml was checked against all three supplied identity fields and version 1.0.0.0. All release smoke checks passed. This verifies packaging and launcher behavior; signed installation testing and WACK remain outstanding.
+
+## Reserved app display name
+
+If Partner Center rejects Package/Properties/DisplayName as unreserved, copy the exact name from Manage app names into the DisplayName field in store/identity.json. The build script applies this value to both the package display name and the application's visual display name. The reserved display name is separate from IdentityName and cannot be inferred from it. Rebuild and upload the newly generated MSIX; existing packages retain their original manifest.

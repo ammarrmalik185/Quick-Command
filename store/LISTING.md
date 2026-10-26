@@ -1,6 +1,6 @@
-﻿# Quick Command — Microsoft Store listing (en-US)
+﻿# QuickCommand — Microsoft Store listing (en-US)
 
-Product name: Quick Command
+Product name: QuickCommand
 Version: 1.0.0
 Publisher: ParadoXSoftware
 Store ID: 9PD91HNWMDMH
@@ -17,13 +17,13 @@ Turn everyday PowerShell tasks into memorable shortcuts.
 
 ## Description
 
-Quick Command is a small command-line utility for running your own PowerShell shortcuts. Give a task a short name, add a description, and run it with qc.
+QuickCommand is a small command-line utility for running your own PowerShell shortcuts. Give a task a short name, add a description, and run it with qc.
 
 Use qc help to browse your shortcuts and the built-in commands. Open Explorer in your current directory, launch VS Code when installed, or open your command configuration for editing. The starter configuration includes a friendly hello command and a command to show your current directory.
 
 Your commands live in an editable PowerShell file in your local app data folder. Add script blocks for your own workflows and pass arguments straight from your terminal. Your personal configuration stays separate from the installed app files.
 
-Quick Command is designed for users comfortable editing PowerShell. It runs scripts with your normal Windows user permissions. Additional tools used by your shortcuts must be installed separately. The VS Code shortcut requires Visual Studio Code.
+QuickCommand is designed for users comfortable editing PowerShell. It runs scripts with your normal Windows user permissions. Additional tools used by your shortcuts must be installed separately. The VS Code shortcut requires Visual Studio Code.
 
 Run qc from PowerShell or Command Prompt after installation. The Store launcher runs each command in a child PowerShell process: directory changes and environment changes do not persist in the calling terminal. PowerShell users who need in-session navigation can invoke the included qc.ps1 script directly; see the release guide.
 
@@ -54,7 +54,7 @@ PowerShell; shortcuts; command line; terminal; automation; scripts; developer to
 
 ## Certification notes for the reviewer
 
-This is a console application, not a graphical app. Launch Quick Command from Start to view help, or open a terminal and run qc help. Run qc hello and qc hello Developer to try argument forwarding. Run qc where to see the current directory. Run qc edit to open the per-user command configuration. No login, paid service, or credentials are required.
+This is a console application, not a graphical app. Launch QuickCommand from Start to view help, or open a terminal and run qc help. Run qc hello and qc hello Developer to try argument forwarding. Run qc where to see the current directory. Run qc edit to open the per-user command configuration. No login, paid service, or credentials are required.
 
 The runFullTrust capability is required to launch the Windows PowerShell interpreter and execute user-authored commands with the current user's permissions. The app does not request elevation or change PowerShell execution policy. Organizational PowerShell restrictions may prevent scripts from running. VS Code is optional; the edit command falls back to Notepad. No personal developer configuration is included.
 
