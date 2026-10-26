@@ -1,2 +1,8 @@
 commands.psd1
 commands.ps1
+
+# Generated release output and local Store identity
+artifacts/
+store/identity.local.json
+*.pfx
+*.p12

@@ -17,7 +17,7 @@ Quick Command is a PowerShell-based utility to manage and execute custom shell s
     Set-Alias qc "D:\Projects\Personal\Custom Shell Scripts\Quick Command\qc.ps1"
     ```
 
-3.  Rename `commands_sample.ps1` to `commands.ps1` to start defining your own commands.
+3.  Copy `commands.store.ps1` to `commands.ps1` to start with portable demo commands. If the file is missing, the first run creates it automatically.
 
 ## Usage
 
@@ -65,3 +65,12 @@ $commands = @{
 
 - **Title**: A short description shown in `qc help`.
 - **Command**: A ScriptBlock `{ ... }` containing the PowerShell code to execute.
+
+## Microsoft Store release (1.0.0)
+
+Build a portable release with `powershell -NoProfile -File .\scripts\Build-Store.ps1 -StageOnly`.
+For MSIX packaging, identity configuration, Store listing copy, icons, screenshot references,
+and submission steps, see [the release guide](store/RELEASE.md) and [listing details](store/LISTING.md).
+Store builds keep editable commands in local app data and exclude personal repository commands.
+The Store launcher runs commands in a child PowerShell process; navigation changes do not persist
+in the calling shell. Direct qc.ps1 usage retains the original in-session navigation behavior.
