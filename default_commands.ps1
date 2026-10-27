@@ -4,7 +4,7 @@
     help = @{
         Title = 'List all commands'
         Command = {
-            Write-Host "`nQuick Command 1.0.0" -ForegroundColor Cyan
+            Write-Host "`nQuick Command 1.0.1" -ForegroundColor Cyan
             Write-Host 'Usage: qc <command> [arguments]'
             Write-Host "`nYour commands:" -ForegroundColor Cyan
             foreach ($name in ($commands.Keys | Sort-Object)) {
@@ -27,5 +27,5 @@
         }
     }
     qc = @{ Title = 'Go to the Quick Command scripts directory'; Command = { Set-Location $PSScriptRoot } }
-    version = @{ Title = 'Show the app version'; Command = { Write-Host 'Quick Command 1.0.0' } }
+    version = @{ Title = 'Show the app version'; Command = { Write-Host 'Quick Command 1.0.1' } }
 }

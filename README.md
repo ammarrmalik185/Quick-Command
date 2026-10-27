@@ -66,7 +66,7 @@ $commands = @{
 - **Title**: A short description shown in `qc help`.
 - **Command**: A ScriptBlock `{ ... }` containing the PowerShell code to execute.
 
-## Microsoft Store release (1.0.0)
+## Microsoft Store release (1.0.1)
 
 Build a portable release with `powershell -NoProfile -File .\scripts\Build-Store.ps1 -StageOnly`.
 For MSIX packaging, identity configuration, Store listing copy, icons, screenshot references,
@@ -74,3 +74,6 @@ and submission steps, see [the release guide](store/RELEASE.md) and [listing det
 Store builds keep editable commands in local app data and exclude personal repository commands.
 The Store launcher runs commands in a child PowerShell process; navigation changes do not persist
 in the calling shell. Direct qc.ps1 usage retains the original in-session navigation behavior.
+The launcher uses `-ExecutionPolicy Bypass` for its child PowerShell session so it works with
+the default Windows `Restricted` policy. It leaves persistent execution policies unchanged;
+organizational Group Policy still takes precedence.

@@ -2,7 +2,7 @@
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
 $root = Split-Path -Parent $PSScriptRoot
-$build = Get-ChildItem (Join-Path $root 'artifacts\1.0.0') -Directory | Sort-Object Name -Descending | Select-Object -First 1
+$build = Get-ChildItem (Join-Path $root 'artifacts\1.0.1') -Directory | Sort-Object Name -Descending | Select-Object -First 1
 if (-not $build) { throw 'Run Build-Store.ps1 -StageOnly first.' }
 $exe = Join-Path $build.FullName 'package\qc.exe'
 $out = Join-Path $root 'store\screenshots'
@@ -37,7 +37,7 @@ try {
         try {
             $g.Clear([Drawing.ColorTranslator]::FromHtml('#101C30'))
             $g.TextRenderingHint = [Drawing.Text.TextRenderingHint]::ClearTypeGridFit
-            $g.DrawString('Quick Command 1.0.0  /  Terminal transcript preview', $small, $mint, 56,34)
+            $g.DrawString('Quick Command 1.0.1  /  Terminal transcript preview', $small, $mint, 56,34)
             $rect = New-Object Drawing.RectangleF 56,106,1808,866
             $g.DrawString($card.Text.TrimEnd(), $font, $fg, $rect)
             $g.DrawString('Rendered from release output. Reference preview - replace with an actual app screenshot for submission.', $small, $mint, 56,1012)

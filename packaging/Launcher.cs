@@ -6,8 +6,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 [assembly: AssemblyTitle("Quick Command")]
 [assembly: AssemblyProduct("Quick Command")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.1.0")]
+[assembly: AssemblyFileVersion("1.0.1.0")]
 class Launcher {
     [DllImport("kernel32.dll")] static extern uint GetConsoleProcessList(uint[] processes, uint count);
     static string Literal(string text) {
@@ -29,7 +29,9 @@ class Launcher {
             }
             code.Append("; if ($LASTEXITCODE) { exit $LASTEXITCODE }; exit 0 } catch { [Console]::Error.WriteLine($_.Exception.Message); exit 1 }");
             string ps = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), @"WindowsPowerShell\v1.0\powershell.exe");
-            ProcessStartInfo info = new ProcessStartInfo(ps, "-NoLogo -NoProfile -File \"" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "launch.ps1") + "\" " + Convert.ToBase64String(Encoding.Unicode.GetBytes(code.ToString())));
+            // Apply only to this child session: clean Windows clients default to Restricted.
+            // This does not change persistent settings or override organizational Group Policy.
+            ProcessStartInfo info = new ProcessStartInfo(ps, "-NoLogo -NoProfile -ExecutionPolicy Bypass -File \"" + Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "launch.ps1") + "\" " + Convert.ToBase64String(Encoding.Unicode.GetBytes(code.ToString())));
             info.UseShellExecute = false;
             // Keep the invoking terminal's working directory and streams.
             using (Process child = Process.Start(info)) { child.WaitForExit(); result = child.ExitCode; }

@@ -5,9 +5,9 @@
 )
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
-$version = '1.0.0'
+$version = '1.0.1'
 # Every invocation gets a fresh staging directory; never delete user files.
-$out = Join-Path $root ('artifacts\1.0.0\' + (Get-Date -Format 'yyyyMMdd-HHmmss-fff'))
+$out = Join-Path $root ("artifacts\$version\" + (Get-Date -Format 'yyyyMMdd-HHmmss-fff'))
 $stage = Join-Path $out 'package'
 New-Item -ItemType Directory -Force $stage | Out-Null
 & (Join-Path $PSScriptRoot 'New-StoreIcons.ps1')
@@ -22,7 +22,7 @@ if (-not (Test-Path $csc)) { throw 'The .NET Framework 4.x C# compiler is requir
 & $csc /nologo /target:exe /platform:x64 /optimize+ ('/win32icon:' + (Join-Path $root 'store\assets\QuickCommand.ico')) ('/out:' + (Join-Path $stage 'qc.exe')) (Join-Path $root 'packaging\Launcher.cs')
 if ($LASTEXITCODE -ne 0) { throw 'Launcher compilation failed.' }
 if ($StageOnly) {
-    Compress-Archive -Path (Join-Path $stage '*') -DestinationPath (Join-Path $out 'QuickCommand-1.0.0-x64-portable.zip')
+    Compress-Archive -Path (Join-Path $stage '*') -DestinationPath (Join-Path $out "QuickCommand-$version-x64-portable.zip")
     Write-Host "Portable build: $out"
     return
 }
